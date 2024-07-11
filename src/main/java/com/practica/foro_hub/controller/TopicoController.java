@@ -5,10 +5,11 @@ import com.practica.foro_hub.topico.Topico;
 import com.practica.foro_hub.topico.TopicoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/topico")
@@ -19,5 +20,10 @@ public class TopicoController {
     @PostMapping
     public void registrarTopico(@RequestBody @Valid DatosRegistrarTopico datosRegistrarTopico){
         topicoRepository.save(new Topico(datosRegistrarTopico));
+    }
+
+    @GetMapping
+    public Page<Topico> listadoTopicos(@PageableDefault(size = 10) Pageable paginacion) {
+        return topicoRepository.findAllByOrderByFechaDeCreacionAsc(paginacion);
     }
 }
