@@ -1,8 +1,10 @@
 package com.practica.foro_hub.controller;
 
+import com.practica.foro_hub.topico.DatosActualizarTopico;
 import com.practica.foro_hub.topico.DatosRegistrarTopico;
 import com.practica.foro_hub.topico.Topico;
 import com.practica.foro_hub.topico.TopicoRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,7 +32,14 @@ public class TopicoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Topico> consultarTopico(@PathVariable Long id){
+    public Optional consultarTopico(@PathVariable Long id){
         return topicoRepository.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public void actualizarTopico(@RequestBody DatosActualizarTopico datosActualizarTopico, @PathVariable Long id){
+        Topico topico = topicoRepository.getReferenceById(id);
+        topico.actualizarDatos(datosActualizarTopico);
     }
 }
