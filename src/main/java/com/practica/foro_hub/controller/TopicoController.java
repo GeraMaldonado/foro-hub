@@ -1,6 +1,9 @@
 package com.practica.foro_hub.controller;
 
 import com.practica.foro_hub.domain.topico.*;
+import com.practica.foro_hub.domain.topico.DatosRespuestasTopico;
+import com.practica.foro_hub.domain.topico.Topico;
+import com.practica.foro_hub.domain.topico.TopicoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
