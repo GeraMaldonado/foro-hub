@@ -1,4 +1,4 @@
-package com.practica.foro_hub.topico;
+package com.practica.foro_hub.domain.topico;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
